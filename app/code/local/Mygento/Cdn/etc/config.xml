@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Mygento_Cdn>
+            <version>1.0.0</version>
+        </Mygento_Cdn>
+    </modules>
+    <global>
+        <helpers>
+            <cdn>
+                <class>Mygento_Cdn_Helper</class>
+            </cdn>
+        </helpers>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <cdn>
+                    <files>
+                        <default>Mygento_Cdn.csv</default>
+                    </files>
+                </cdn>
+            </modules>
+        </translate>
+    </adminhtml>
+    <frontend>
+        <translate>
+            <modules>
+                <cdn>
+                    <files>
+                        <default>Mygento_Cdn.csv</default>
+                    </files>
+                </cdn>
+            </modules>
+        </translate>
+    </frontend>
+</config>

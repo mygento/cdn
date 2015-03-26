@@ -1,0 +1,28 @@
+{
+    "name": "mygento/cdn",
+    "type": "magento-module",
+    "license": "proprietary",
+    "homepage": "https://bitbucket.org/mygento/cdn",
+    "description": "CDN module",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.*",
+        "magento-ecg/coding-standard": "dev-master",
+	"sebastian/phpdcd": "*",
+	"sebastian/phpcpd": "*",
+        "jakub-onderka/php-parallel-lint": "0.*",
+        "jakub-onderka/php-console-highlighter": "0.*",
+	"phpmd/phpmd" : "@stable"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:mygento/cdn.git"
+        }
+    ],
+    "extra": {
+        "magento-root-dir": "."
+    }
+}
