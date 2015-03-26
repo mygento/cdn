@@ -7,30 +7,64 @@
     </modules>
     <global>
         <helpers>
-            <cdn>
+            <mycdn>
                 <class>Mygento_Cdn_Helper</class>
-            </cdn>
+            </mycdn>
+            <!--            <catalog>
+                <rewrite>
+                    <image>Mygento_Cdn_Helper_Image</image>
+                </rewrite>
+            </catalog>-->
         </helpers>
+        <models>
+            <mycdn>
+                <class>Mygento_Cdn_Model</class>
+            </mycdn>
+            <catalog>
+                <rewrite>
+                    <product_image>Mygento_Cdn_Model_Rewrite_Catalog_Product_Image</product_image>
+                </rewrite>
+            </catalog>
+        </models>
     </global>
     <adminhtml>
         <translate>
             <modules>
-                <cdn>
+                <mycdn>
                     <files>
                         <default>Mygento_Cdn.csv</default>
                     </files>
-                </cdn>
+                </mycdn>
             </modules>
         </translate>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mycdn>
+                                            <title>Mygento CDN Configuration</title>
+                                        </mycdn>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
     </adminhtml>
     <frontend>
         <translate>
             <modules>
-                <cdn>
+                <mycdn>
                     <files>
                         <default>Mygento_Cdn.csv</default>
                     </files>
-                </cdn>
+                </mycdn>
             </modules>
         </translate>
     </frontend>

@@ -23,5 +23,3 @@ class Mygento_Cdn_Block_Version extends Mage_Adminhtml_Block_Abstract implements
     }
 
 }
-
-?>
