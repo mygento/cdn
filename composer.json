@@ -1,8 +1,8 @@
 {
     "name": "mygento/cdn",
     "type": "magento-module",
-    "license": "proprietary",
-    "homepage": "https://bitbucket.org/mygento/cdn",
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/mygento/cdn.git",
     "description": "CDN module",
     "require": {
         "magento-hackathon/magento-composer-installer": "*"
@@ -19,10 +19,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "git@bitbucket.org:mygento/cdn.git"
+            "url": "https://github.com/mygento/cdn.git"
         }
-    ],
-    "extra": {
-        "magento-root-dir": "."
-    }
+    ]
 }
