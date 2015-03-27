@@ -26,6 +26,15 @@
                 </rewrite>
             </catalog>
         </models>
+        <cache>
+            <types>
+                <mycdn>
+                    <label>Mygento CDN Storage</label>
+                    <description>Mygento CDN Storage DESCRIPTION</description>
+                    <tags>MYCDN</tags>
+                </mycdn>
+            </types>
+        </cache>
     </global>
     <adminhtml>
         <translate>

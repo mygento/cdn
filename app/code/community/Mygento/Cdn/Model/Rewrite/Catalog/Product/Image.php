@@ -20,4 +20,33 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         return parent::getImageProcessor();
     }
 
+    /**
+     * Checks to see if the image has been verified lately by checking in the cache or fails
+     * back to the parent method as appropriate.
+     *
+     * @return bool
+     */
+    public function isCached()
+    {
+        if (!Mage::getStoreConfig('mycdn/general/enabled')) {
+            return parent::isCached();
+        }
+        $adapter = Mage::getModel('mycdn/adapter');
+        return $adapter->fileExists($this->_newFile);
+    }
+
+    /**
+     * Provides the URL to the image on the CDN or fails back to the parent method as appropriate.
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        if (!Mage::getStoreConfig('mycdn/general/enabled')) {
+            return parent::getUrl();
+        }
+
+        return Mage::getModel('mycdn/adapter')->getUrl(Mage::helper('mycdn')->getRelativeFile($this->_newFile));
+    }
+
 }

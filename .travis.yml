@@ -15,7 +15,7 @@ before_script:
 
 script:
   - php vendor/bin/parallel-lint --exclude vendor .
-  - phpcs --standard=vendor/magento-ecg/coding-standard/Ecg --ignore=vendor .
-  - php vendor/bin/phpcpd --exclude=vendor .
-  - php vendor/bin/phpdcd --exclude=vendor .
-  - php vendor/bin/phpmd . text codesize --exclude vendor
+  - phpcs --standard=vendor/magento-ecg/coding-standard/Ecg --ignore=vendor,lib .
+  - php vendor/bin/phpcpd --exclude=vendor --exclude=lib .
+  - php vendor/bin/phpdcd --exclude=vendor --exclude=lib .
+  - php vendor/bin/phpmd . text codesize --exclude vendor,lib
