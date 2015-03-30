@@ -28,12 +28,12 @@ class Mygento_Cdn_Model_Adapters_S3
         return $filename;
     }
 
-    public function upload_file($file, $uploadName)
+    public function upload_file($file, $uploadName, $content_type = 'application/octet-stream')
     {
         if ($this->accessKey !== null && $this->secretKey !== null) {
             Mygento_S3::setAuth($this->accessKey, $this->secretKey);
         }
-        return Mygento_S3::putObject(Mygento_S3::inputFile($file, false), $this->bucketName, $uploadName);
+        return Mygento_S3::putObject(Mygento_S3::inputFile($file, false), $this->bucketName, $uploadName, null, array(), array('Content-Type' => $content_type));
     }
 
 }

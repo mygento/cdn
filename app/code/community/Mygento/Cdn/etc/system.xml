@@ -56,8 +56,7 @@
                     </fields>
                 </general>
                 <s3>
-                    <label>S3 Configuration</label>
-                    <frontend_type>text</frontend_type>
+                    <label>Amazon S3 Configuration</label>
                     <sort_order>20</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>0</show_in_website>
@@ -108,6 +107,58 @@
                         </url_base_secure>
                     </fields>
                 </s3>
+                <selectel>
+                    <label>Selectel (OpenStack Swift)</label>
+                    <sort_order>21</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <user translate="label">
+                            <label>User</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </user>
+                        <passwd translate="label">
+                            <label>Password</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </passwd>
+                        <bucket translate="label">
+                            <label>Container</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Must already be created and be dedicated for this Magento install only.</comment>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </bucket>
+                        <url_base translate="label">
+                            <label>Base URL</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Example: http://xxxx.selcdn.ru/[container]</comment>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url_base>
+                        <url_base_secure translate="label">
+                            <label>Secure Base URL</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Example: https://xxxx.selcdn.ru/[container]</comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </url_base_secure>
+                    </fields>
+                </selectel>
             </groups>
         </mycdn>
     </sections>

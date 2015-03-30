@@ -10,11 +10,6 @@
             <mycdn>
                 <class>Mygento_Cdn_Helper</class>
             </mycdn>
-            <!--            <catalog>
-                <rewrite>
-                    <image>Mygento_Cdn_Helper_Image</image>
-                </rewrite>
-            </catalog>-->
         </helpers>
         <models>
             <mycdn>
@@ -25,6 +20,11 @@
                     <product_image>Mygento_Cdn_Model_Rewrite_Catalog_Product_Image</product_image>
                 </rewrite>
             </catalog>
+            <core>
+                <rewrite>
+                    <design_package>Mygento_Cdn_Model_Rewrite_Core_Design_Package</design_package>
+                </rewrite>
+            </core>
         </models>
         <cache>
             <types>
