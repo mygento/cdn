@@ -33,7 +33,7 @@ class Mygento_Cdn_Model_Adapters_S3
         if ($this->accessKey !== null && $this->secretKey !== null) {
             Mygento_S3::setAuth($this->accessKey, $this->secretKey);
         }
-        return Mygento_S3::putObject(Mygento_S3::inputFile($file, false), $this->bucketName, $uploadName, null, array(), array('Content-Type' => $content_type));
+        return Mygento_S3::putObject(Mygento_S3::inputFile($file, false), $this->bucketName, $uploadName, Mygento_S3::ACL_PUBLIC_READ, array(), array('Content-Type' => $content_type));
     }
 
 }

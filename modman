@@ -2,3 +2,4 @@ app/code/community/Mygento/Cdn app/code/community/Mygento/Cdn
 app/etc/modules/Mygento_Cdn.xml app/etc/modules/Mygento_Cdn.xml
 app/locale/ru_RU/Mygento_Cdn.csv app/locale/ru_RU/Mygento_Cdn.csv
 lib/Mygento/S3.php lib/Mygento/S3.php
+lib/Mygento/SelectelStorage.php lib/Mygento/SelectelStorage.php

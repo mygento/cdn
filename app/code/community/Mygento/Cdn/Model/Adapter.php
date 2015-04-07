@@ -38,7 +38,7 @@ class Mygento_Cdn_Model_Adapter
 
     public function upload_file($file, $uploadName, $content_type = null)
     {
-        Mage::helper('mycdn')->addLog('uploading '.Mage::helper('mycdn')->getRelativeFile($uploadName));
+        Mage::helper('mycdn')->addLog('uploading '.Mage::helper('mycdn')->getRelativeFile($uploadName).' as '.$content_type);
         $adapter = $this->getAdapter();
         if ($adapter) {
             Mage::helper('mycdn')->addLog('chosing adapter: '.get_class($adapter));

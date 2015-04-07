@@ -12,7 +12,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
                 $srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter
         );
 
-        return $this->uploadfile($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $temp);
+        return $this->uploadfile($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $temp, $content_type);
     }
 
     private function uploadfile($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $temp, $content_type = null)
@@ -22,7 +22,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
             return parent::_mergeFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter);
         }
         $result = $adapter->upload_file($temp, $targetFile, $content_type);
-        Mage::helper('mycdn')->addLog($targetFile.' upload result =>'.($result ? 'true' : 'false'));
+        Mage::helper('mycdn')->addLog($targetFile.' upload result as '.$content_type.' =>'.($result ? 'true' : 'false'));
         if ($result) {
             unlink($temp);
         }
