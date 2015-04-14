@@ -17,12 +17,12 @@ class Mygento_Cdn_Model_Adapters_Selectel
     public function getUrl($filename)
     {
         $type = Mage::app()->getStore()->isCurrentlySecure() ? 'url_base_secure' : 'url_base';
-        $base_url = Mage::getStoreConfig('mycdn/selectel/'.$type);
-        $filename = $base_url.'/'.$filename;
+        $base_url = Mage::getStoreConfig('mycdn/selectel/' . $type);
+        $filename = $base_url . '/' . $filename;
         return $filename;
     }
 
-    public function upload_file($file, $uploadName, $content_type = 'application/octet-stream')
+    public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
         if ($this->user == null || $this->pass == null) {
             return false;
@@ -31,5 +31,4 @@ class Mygento_Cdn_Model_Adapters_Selectel
         $container = $storage->getContainer($this->bucketName);
         return $container->putFile($file, $uploadName);
     }
-
 }

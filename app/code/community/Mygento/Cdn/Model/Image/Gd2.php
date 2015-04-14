@@ -15,15 +15,15 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         $fileName = (!isset($destination) ) ? $this->_fileName : $destination;
 
         if (isset($destination) && isset($newName)) {
-            $fileName = $destination."/".$newName;
+            $fileName = $destination . "/" . $newName;
         } elseif (isset($destination) && !isset($newName)) {
             $info = pathinfo($destination);
             $fileName = $destination;
             $destination = $info['dirname'];
         } elseif (!isset($destination) && isset($newName)) {
-            $fileName = $this->_fileSrcPath."/".$newName;
+            $fileName = $this->_fileSrcPath . "/" . $newName;
         } else {
-            $fileName = $this->_fileSrcPath.$this->_fileSrcName;
+            $fileName = $this->_fileSrcPath . $this->_fileSrcName;
         }
         $this->uploadfile($destination, $newName, $temp, $fileName);
     }
@@ -34,10 +34,9 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         if (!$adapter) {
             return parent::save($destination, $newName);
         }
-        $result = $adapter->upload_file($temp, $fileName);
+        $result = $adapter->uploadFile($temp, $fileName);
         if ($result) {
             unlink($temp);
         }
     }
-
 }
