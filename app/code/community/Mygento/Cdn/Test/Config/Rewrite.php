@@ -10,7 +10,7 @@ class Mygento_Cdn_Test_Config_Rewrite extends EcomDev_PHPUnit_Test_Case_Config
     {
         $this->assertModelAlias('catalog/product_image', 'Mygento_Cdn_Model_Rewrite_Catalog_Product_Image');
     }
-    
+
     /**
      * @test
      */
@@ -18,5 +18,4 @@ class Mygento_Cdn_Test_Config_Rewrite extends EcomDev_PHPUnit_Test_Case_Config
     {
         $this->assertModelAlias('core/design_package', 'Mygento_Cdn_Model_Rewrite_Core_Design_Package');
     }
-    
 }

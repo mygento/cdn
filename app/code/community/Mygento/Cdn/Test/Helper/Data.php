@@ -15,6 +15,4 @@ class Mygento_Cdn_Test_Helper_Data extends EcomDev_PHPUnit_Test_Case
         $this->assertInstanceOf('Mygento_Cdn_Helper_Data', $helper);
         return $helper;
     }
-
 }
-
