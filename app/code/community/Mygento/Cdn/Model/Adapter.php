@@ -44,8 +44,10 @@ class Mygento_Cdn_Model_Adapter
             $filename = Mage::helper('mycdn')->getRelativeFile($downloadName);
             $image = $adapter->downloadFile($filename);
             if ($image) {
-                $image_name = basename($downloadName);
-                $image_path = dirname($downloadName);
+                $bn = new Zend_Filter_BaseName();
+                $image_name = $bn->filter($downloadName);
+                $dn = new Zend_Filter_Dir();
+                $image_path = $dn->filter($downloadName);
                 $file = new Varien_Io_File();
                 $file->setAllowCreateFolders(true);
                 $file->open(array('path' => $image_path));

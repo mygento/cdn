@@ -36,7 +36,8 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         }
         $result = $adapter->uploadFile($temp, $fileName);
         if ($result) {
-            unlink($temp);
+            $ioObject = new Varien_Io_File();
+            $ioObject->rm($temp);
         }
     }
 }

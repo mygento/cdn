@@ -61,7 +61,7 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::_fileExists($filename);
         }
-        if (file_exists($filename)) {
+        if (is_file($filename)) {
             return true;
         } else {
             Mage::helper('mycdn')->addLog('[download] no source on server -> ' . $filename);

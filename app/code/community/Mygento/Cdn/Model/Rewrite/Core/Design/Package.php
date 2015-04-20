@@ -22,7 +22,8 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         $result = $adapter->uploadFile($temp, $targetFile, $content_type);
         Mage::helper('mycdn')->addLog($targetFile . ' upload result as ' . $content_type . ' =>' . ($result ? 'true' : 'false'));
         if ($result) {
-            unlink($temp);
+            $ioObject = new Varien_Io_File();
+            $ioObject->rm($temp);
         }
 
         return $result;
