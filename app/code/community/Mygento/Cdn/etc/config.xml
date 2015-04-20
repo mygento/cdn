@@ -2,10 +2,15 @@
 <config>
     <modules>
         <Mygento_Cdn>
-            <version>1.0.0</version>
+            <version>1.2.0</version>
         </Mygento_Cdn>
     </modules>
     <global>
+        <blocks>
+            <mycdn>
+                <class>Mygento_Cdn_Block</class>
+            </mycdn>
+        </blocks>
         <helpers>
             <mycdn>
                 <class>Mygento_Cdn_Helper</class>
@@ -88,4 +93,11 @@
             </modules>
         </translate>
     </frontend>
+    <phpunit>
+        <suite>
+            <modules>
+                <Mygento_Cdn/>
+            </modules>
+        </suite>
+    </phpunit>
 </config>

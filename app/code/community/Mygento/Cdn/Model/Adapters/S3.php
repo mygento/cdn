@@ -17,7 +17,7 @@ class Mygento_Cdn_Model_Adapters_S3
     /**
      * Creates a full URL to the image on the remote server
      *
-     * @param string $filename	path (with filename) from the CDN root
+     * @param string $filename  path (with filename) from the CDN root
      * @return string
      */
     public function getUrl($filename)
@@ -28,7 +28,7 @@ class Mygento_Cdn_Model_Adapters_S3
         return $filename;
     }
 
-    public function upload_file($file, $uploadName, $content_type = 'application/octet-stream')
+    public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
         if ($this->accessKey !== null && $this->secretKey !== null) {
             Mygento_S3::setAuth($this->accessKey, $this->secretKey);

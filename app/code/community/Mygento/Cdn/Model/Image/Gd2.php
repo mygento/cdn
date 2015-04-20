@@ -34,7 +34,7 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         if (!$adapter) {
             return parent::save($destination, $newName);
         }
-        $result = $adapter->upload_file($temp, $fileName);
+        $result = $adapter->uploadFile($temp, $fileName);
         if ($result) {
             unlink($temp);
         }

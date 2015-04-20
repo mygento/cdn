@@ -8,9 +8,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         $temp = tempnam(sys_get_temp_dir(), 'cdn');
         Mage::helper('mycdn')->addLog('merging to ' . $targetFile);
 
-        Mage::helper('core')->mergeFiles(
-            $srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter
-        );
+        Mage::helper('core')->mergeFiles($srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter);
 
         return $this->uploadfile($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $temp, $content_type);
     }
@@ -21,7 +19,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         if (!$adapter) {
             return parent::_mergeFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter);
         }
-        $result = $adapter->upload_file($temp, $targetFile, $content_type);
+        $result = $adapter->uploadFile($temp, $targetFile, $content_type);
         Mage::helper('mycdn')->addLog($targetFile . ' upload result as ' . $content_type . ' =>' . ($result ? 'true' : 'false'));
         if ($result) {
             unlink($temp);
@@ -54,9 +52,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
 
         $targetFilename = md5(implode(',', $files)) . '.js';
 
-        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' .
-            ($this->needMerge('js' . DS . $targetFilename) ? 'true' : 'false')
-        );
+        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' . ($this->needMerge('js' . DS . $targetFilename) ? 'true' : 'false'));
 
         if ($this->needMerge('js' . DS . $targetFilename)) {
             $result = $this->processFiles($files, 'js' . DS . $targetFilename, false, null, 'js', 'application/x-javascript');
@@ -84,9 +80,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         $mergerDir = $isSecure ? 'css_secure' : 'css';
 
         $targetFilename = md5(implode(',', $files)) . '.css';
-        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' .
-            ($this->needMerge($mergerDir . DS . $targetFilename) ? 'true' : 'false')
-        );
+        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' . ($this->needMerge($mergerDir . DS . $targetFilename) ? 'true' : 'false'));
 
         if ($this->needMerge($mergerDir . DS . $targetFilename)) {
             $result = $this->processFiles($files, $mergerDir . DS . $targetFilename, false, array($this, 'beforeMergeCss'), 'css', 'text/css');

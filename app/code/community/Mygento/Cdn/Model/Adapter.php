@@ -13,7 +13,7 @@ class Mygento_Cdn_Model_Adapter
         try {
             return Mage::getModel('mycdn/adapters_' . $adapter);
         } catch (Exception $ex) {
-            Mage::helper('mycdn')->AddLog($ex->getMessage());
+            Mage::helper('mycdn')->addLog($ex->getMessage());
         }
         return false;
     }
@@ -36,14 +36,15 @@ class Mygento_Cdn_Model_Adapter
         return Mage::app()->getCache()->load('cdn_' . $fileName);
     }
 
-    public function upload_file($file, $uploadName, $content_type = null)
+    public function uploadFile($file, $uploadName, $content_type = null)
     {
+        Varien_Profiler::start('upload_file_'.$uploadName);
         Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as ' . $content_type);
         $adapter = $this->getAdapter();
         if ($adapter) {
             Mage::helper('mycdn')->addLog('chosing adapter: ' . get_class($adapter));
             $filename = Mage::helper('mycdn')->getRelativeFile($uploadName);
-            $result = $adapter->upload_file($file, $filename, $content_type);
+            $result = $adapter->uploadFile($file, $filename, $content_type);
             if ($result) {
                 Mage::helper('mycdn')->addLog('uploaded successfully ' . $filename);
                 Mage::helper('mycdn')->addLog('saving to cache ' . $filename);
@@ -51,6 +52,7 @@ class Mygento_Cdn_Model_Adapter
             } else {
                 Mage::helper('mycdn')->addLog('not uploaded ' . $filename);
             }
+            Varien_Profiler::stop('upload_file_'.$uploadName);
             return $result;
         }
     }
