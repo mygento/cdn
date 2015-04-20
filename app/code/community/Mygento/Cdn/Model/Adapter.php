@@ -38,6 +38,7 @@ class Mygento_Cdn_Model_Adapter
 
     public function uploadFile($file, $uploadName, $content_type = null)
     {
+        Varien_Profiler::start('upload_file_'.$uploadName);
         Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as ' . $content_type);
         $adapter = $this->getAdapter();
         if ($adapter) {
@@ -51,6 +52,7 @@ class Mygento_Cdn_Model_Adapter
             } else {
                 Mage::helper('mycdn')->addLog('not uploaded ' . $filename);
             }
+            Varien_Profiler::stop('upload_file_'.$uploadName);
             return $result;
         }
     }
