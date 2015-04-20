@@ -20,7 +20,7 @@ Features
 - Upload CSS merge cache in CDN and replace url ✓
 - Upload on product image save and download source image if absent ✓
 - Upload wysiwyg images
-- Upload CMS directives
+- Upload with CMS directives
 - Mage::getBaseUrl('media')
 
 

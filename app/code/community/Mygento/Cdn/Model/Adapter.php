@@ -44,9 +44,16 @@ class Mygento_Cdn_Model_Adapter
             $filename = Mage::helper('mycdn')->getRelativeFile($downloadName);
             $image = $adapter->downloadFile($filename);
             if ($image) {
-                $fp = fopen($downloadName, 'w');
-                fwrite($fp, $image);
-                fclose($fp);
+                $image_name = basename($downloadName);
+                $image_path = dirname($downloadName);
+                $file = new Varien_Io_File();
+                $file->setAllowCreateFolders(true);
+                $file->open(array('path' => $image_path));
+                $file->streamOpen($image_name);
+                $file->streamLock(true);
+                $file->streamWrite($image);
+                $file->streamUnlock();
+                $file->streamClose();
                 Mage::helper('mycdn')->addLog('[downloaded] File downloaded to ' . $downloadName);
                 Varien_Profiler::stop('cdn_download_file_' . $downloadName);
                 Mage::app()->getCache()->save($this->getUrl($filename), 'cdn_' . $filename, array('MYCDN'));
