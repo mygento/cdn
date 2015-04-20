@@ -34,4 +34,9 @@ class Mygento_Cdn_Test_Config_Base extends EcomDev_PHPUnit_Test_Case_Config
     {
         $this->assertHelperAlias('mycdn', 'Mygento_Cdn_Helper_Data');
     }
+
+    public function testEvent()
+    {
+        $this->assertEventObserverDefined('global', 'catalog_product_media_save_before', 'mycdn/observer', 'uploadOnSave', 'mycdn_upload');
+    }
 }

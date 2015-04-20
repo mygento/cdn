@@ -28,6 +28,14 @@ class Mygento_Cdn_Model_Adapters_S3
         return $filename;
     }
 
+    public function downloadFile($downloadName)
+    {
+        if ($this->accessKey !== null && $this->secretKey !== null) {
+            Mygento_S3::setAuth($this->accessKey, $this->secretKey);
+        }
+        return Mygento_S3::getObject($this->bucketName, $downloadName);
+    }
+
     public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
         if ($this->accessKey !== null && $this->secretKey !== null) {

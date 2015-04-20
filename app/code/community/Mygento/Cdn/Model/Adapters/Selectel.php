@@ -22,6 +22,17 @@ class Mygento_Cdn_Model_Adapters_Selectel
         return $filename;
     }
 
+    public function downloadFile($downloadName)
+    {
+        if ($this->user == null || $this->pass == null) {
+            return false;
+        }
+        $storage = new Mygento_SelectelStorage($this->user, $this->pass);
+        $container = $storage->getContainer($this->bucketName);
+        $result = $container->getFile($downloadName);
+        return $result['content'];
+    }
+
     public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
         if ($this->user == null || $this->pass == null) {

@@ -6,7 +6,40 @@ Issues
 -------
 [GitHub](https://github.com/mygento/cdn/issues).
 
+Working with Adapters
+========
+- Amazon S3
+- Selectel
 
 
-=======
+
+Features
+========
+- Upload product image cache in CDN and replace url ✓
+- Upload JS merge cache in CDN and replace url ✓
+- Upload CSS merge cache in CDN and replace url ✓
+- Upload on product image save and download source image if absent ✓
+- Upload wysiwyg images
+- Upload CMS directives
+- Mage::getBaseUrl('media')
+
+
+### Install a module in your project
+If you want to use [the our Magento module repository](http://mygento.github.io/packages),
+set up your root ```composer.json``` in your project like this:
+
+```json
+{
+    "require": {
+        "mygento/cdn": "*",
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://mygento.github.io/packages"
+        }
+    ]
+}
+```
+
 www.mygento.ru
