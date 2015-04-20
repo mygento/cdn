@@ -14,5 +14,4 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return ltrim(str_replace(Mage::getBaseDir('media'), '', $file), '/');
     }
-
 }

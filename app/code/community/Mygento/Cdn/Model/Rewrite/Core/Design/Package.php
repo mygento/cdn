@@ -6,10 +6,10 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
     private function processFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $content_type = null)
     {
         $temp = tempnam(sys_get_temp_dir(), 'cdn');
-        Mage::helper('mycdn')->addLog('merging to '.$targetFile);
+        Mage::helper('mycdn')->addLog('merging to ' . $targetFile);
 
         Mage::helper('core')->mergeFiles(
-                $srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter
+            $srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter
         );
 
         return $this->uploadfile($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $temp, $content_type);
@@ -22,7 +22,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
             return parent::_mergeFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter);
         }
         $result = $adapter->upload_file($temp, $targetFile, $content_type);
-        Mage::helper('mycdn')->addLog($targetFile.' upload result as '.$content_type.' =>'.($result ? 'true' : 'false'));
+        Mage::helper('mycdn')->addLog($targetFile . ' upload result as ' . $content_type . ' =>' . ($result ? 'true' : 'false'));
         if ($result) {
             unlink($temp);
         }
@@ -33,11 +33,11 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
     private function needMerge($file)
     {
         $fileName = Mage::helper('mycdn')->getRelativeFile($file);
-        Mage::helper('mycdn')->addLog('checking cache for file '.$fileName);
-        if (Mage::app()->getCache()->load('cdn_'.$fileName)) {
-            Mage::helper('mycdn')->addLog('[cached] '.$fileName);
+        Mage::helper('mycdn')->addLog('checking cache for file ' . $fileName);
+        if (Mage::app()->getCache()->load('cdn_' . $fileName)) {
+            Mage::helper('mycdn')->addLog('[cached] ' . $fileName);
         }
-        return !(Mage::app()->getCache()->load('cdn_'.$fileName));
+        return !(Mage::app()->getCache()->load('cdn_' . $fileName));
     }
 
     /**
@@ -52,19 +52,19 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
             return parent::getMergedJsUrl($files);
         }
 
-        $targetFilename = md5(implode(',', $files)).'.js';
+        $targetFilename = md5(implode(',', $files)) . '.js';
 
-        Mage::helper('mycdn')->addLog($targetFilename.' need to merge =>  '.
-                ($this->needMerge('js'.DS.$targetFilename) ? 'true' : 'false')
+        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' .
+            ($this->needMerge('js' . DS . $targetFilename) ? 'true' : 'false')
         );
 
-        if ($this->needMerge('js'.DS.$targetFilename)) {
-            $result = $this->processFiles($files, 'js'.DS.$targetFilename, false, null, 'js', 'application/x-javascript');
+        if ($this->needMerge('js' . DS . $targetFilename)) {
+            $result = $this->processFiles($files, 'js' . DS . $targetFilename, false, null, 'js', 'application/x-javascript');
             if (!$result) {
                 return parent::getMergedJsUrl($files);
             }
         }
-        return Mage::getModel('mycdn/adapter')->getUrl('js/'.$targetFilename);
+        return Mage::getModel('mycdn/adapter')->getUrl('js/' . $targetFilename);
     }
 
     /**
@@ -83,18 +83,17 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         $isSecure = Mage::app()->getRequest()->isSecure();
         $mergerDir = $isSecure ? 'css_secure' : 'css';
 
-        $targetFilename = md5(implode(',', $files)).'.css';
-        Mage::helper('mycdn')->addLog($targetFilename.' need to merge =>  '.
-                ($this->needMerge($mergerDir.DS.$targetFilename) ? 'true' : 'false')
+        $targetFilename = md5(implode(',', $files)) . '.css';
+        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' .
+            ($this->needMerge($mergerDir . DS . $targetFilename) ? 'true' : 'false')
         );
 
-        if ($this->needMerge($mergerDir.DS.$targetFilename)) {
-            $result = $this->processFiles($files, $mergerDir.DS.$targetFilename, false, array($this, 'beforeMergeCss'), 'css', 'text/css');
+        if ($this->needMerge($mergerDir . DS . $targetFilename)) {
+            $result = $this->processFiles($files, $mergerDir . DS . $targetFilename, false, array($this, 'beforeMergeCss'), 'css', 'text/css');
             if (!$result) {
                 return parent::getMergedCssUrl($files);
             }
         }
-        return Mage::getModel('mycdn/adapter')->getUrl($mergerDir.'/'.$targetFilename);
+        return Mage::getModel('mycdn/adapter')->getUrl($mergerDir . '/' . $targetFilename);
     }
-
 }

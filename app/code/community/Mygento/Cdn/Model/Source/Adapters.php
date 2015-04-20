@@ -10,5 +10,4 @@ class Mygento_Cdn_Model_Source_Adapters
             array('value' => 'selectel', 'label' => 'Selectel'),
         );
     }
-
 }

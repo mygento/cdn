@@ -23,8 +23,8 @@ class Mygento_Cdn_Model_Adapters_S3
     public function getUrl($filename)
     {
         $type = Mage::app()->getStore()->isCurrentlySecure() ? 'url_base_secure' : 'url_base';
-        $base_url = Mage::getStoreConfig('mycdn/s3/'.$type);
-        $filename = $base_url.'/'.$filename;
+        $base_url = Mage::getStoreConfig('mycdn/s3/' . $type);
+        $filename = $base_url . '/' . $filename;
         return $filename;
     }
 
@@ -35,5 +35,4 @@ class Mygento_Cdn_Model_Adapters_S3
         }
         return Mygento_S3::putObject(Mygento_S3::inputFile($file, false), $this->bucketName, $uploadName, Mygento_S3::ACL_PUBLIC_READ, array(), array('Content-Type' => $content_type));
     }
-
 }

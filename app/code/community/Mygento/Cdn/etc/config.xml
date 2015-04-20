@@ -35,6 +35,17 @@
                 </mycdn>
             </types>
         </cache>
+        <events>
+            <catalog_product_media_save_before>
+                <observers>
+                    <mycdn_upload>
+                        <type>singleton</type>
+                        <class>Mygento_Cdn_Model_Observer</class>
+                        <method>uploadOnSave</method>
+                    </mycdn_upload>
+                </observers>
+            </catalog_product_media_save_before>
+        </events>
     </global>
     <adminhtml>
         <translate>

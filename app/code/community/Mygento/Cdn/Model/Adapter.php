@@ -11,7 +11,7 @@ class Mygento_Cdn_Model_Adapter
         }
 
         try {
-            return Mage::getModel('mycdn/adapters_'.$adapter);
+            return Mage::getModel('mycdn/adapters_' . $adapter);
         } catch (Exception $ex) {
             Mage::helper('mycdn')->AddLog($ex->getMessage());
         }
@@ -29,30 +29,29 @@ class Mygento_Cdn_Model_Adapter
     public function fileExists($file)
     {
         $fileName = Mage::helper('mycdn')->getRelativeFile($file);
-        Mage::helper('mycdn')->addLog('checking cache for file '.$fileName);
-        if (Mage::app()->getCache()->load('cdn_'.$fileName)) {
-            Mage::helper('mycdn')->addLog('[cached] '.$fileName);
+        Mage::helper('mycdn')->addLog('checking cache for file ' . $fileName);
+        if (Mage::app()->getCache()->load('cdn_' . $fileName)) {
+            Mage::helper('mycdn')->addLog('[cached] ' . $fileName);
         }
-        return Mage::app()->getCache()->load('cdn_'.$fileName);
+        return Mage::app()->getCache()->load('cdn_' . $fileName);
     }
 
     public function upload_file($file, $uploadName, $content_type = null)
     {
-        Mage::helper('mycdn')->addLog('uploading '.Mage::helper('mycdn')->getRelativeFile($uploadName).' as '.$content_type);
+        Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as ' . $content_type);
         $adapter = $this->getAdapter();
         if ($adapter) {
-            Mage::helper('mycdn')->addLog('chosing adapter: '.get_class($adapter));
+            Mage::helper('mycdn')->addLog('chosing adapter: ' . get_class($adapter));
             $filename = Mage::helper('mycdn')->getRelativeFile($uploadName);
             $result = $adapter->upload_file($file, $filename, $content_type);
             if ($result) {
-                Mage::helper('mycdn')->addLog('uploaded successfully '.$filename);
-                Mage::helper('mycdn')->addLog('saving to cache '.$filename);
-                Mage::app()->getCache()->save($this->getUrl($filename), 'cdn_'.$filename, array('MYCDN'));
+                Mage::helper('mycdn')->addLog('uploaded successfully ' . $filename);
+                Mage::helper('mycdn')->addLog('saving to cache ' . $filename);
+                Mage::app()->getCache()->save($this->getUrl($filename), 'cdn_' . $filename, array('MYCDN'));
             } else {
-                Mage::helper('mycdn')->addLog('not uploaded '.$filename);
+                Mage::helper('mycdn')->addLog('not uploaded ' . $filename);
             }
             return $result;
         }
     }
-
 }
