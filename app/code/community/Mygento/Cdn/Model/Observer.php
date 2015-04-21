@@ -27,7 +27,7 @@ class Mygento_Cdn_Model_Observer
             $fileName = $image['file'];
             $file = $config->getMediaPath($fileName);
             Mage::helper('mycdn')->addLog($file);
-            $adapter->upload_file($file, $config->getBaseMediaPathAddition() . $fileName);
+            $adapter->uploadFile($file, $config->getBaseMediaPathAddition() . $fileName);
         }
     }
 }
