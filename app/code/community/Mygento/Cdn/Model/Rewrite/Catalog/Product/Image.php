@@ -46,7 +46,7 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
             return parent::getUrl();
         }
 
-        return Mage::getModel('mycdn/adapter')->getUrl(Mage::helper('mycdn')->getRelativeFile($this->_newFile));
+        return Mage::getModel('mycdn/adapter')->getUrl($this->_newFile);
     }
 
     /**

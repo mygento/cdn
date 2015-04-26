@@ -19,9 +19,9 @@ Features
 - Upload JS merge cache in CDN and replace url ✓
 - Upload CSS merge cache in CDN and replace url ✓
 - Upload on product image save and download source image if absent ✓
-- Upload wysiwyg images
-- Upload with CMS directives
+- Upload wysiwyg images and CMS media directives ✓
 - Mage::getBaseUrl('media')
+- Async upload
 
 
 ### Install a module in your project

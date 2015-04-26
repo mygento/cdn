@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mygento_Cdn>
-            <version>1.3.0</version>
+            <version>1.4.0</version>
         </Mygento_Cdn>
     </modules>
     <global>
@@ -25,6 +25,11 @@
                     <product_image>Mygento_Cdn_Model_Rewrite_Catalog_Product_Image</product_image>
                 </rewrite>
             </catalog>
+            <widget>
+                <rewrite>
+                    <template_filter>Mygento_Cdn_Model_Rewrite_Widget_Template_Filter</template_filter>
+                </rewrite>
+            </widget>
             <core>
                 <rewrite>
                     <design_package>Mygento_Cdn_Model_Rewrite_Core_Design_Package</design_package>

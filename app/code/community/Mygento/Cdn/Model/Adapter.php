@@ -20,9 +20,10 @@ class Mygento_Cdn_Model_Adapter
 
     public function getUrl($file)
     {
+        $fileName = Mage::helper('mycdn')->getRelativeFile($file);
         $adapter = $this->getAdapter();
         if ($adapter) {
-            return $adapter->getUrl($file);
+            return $adapter->getUrl($fileName);
         }
     }
 
