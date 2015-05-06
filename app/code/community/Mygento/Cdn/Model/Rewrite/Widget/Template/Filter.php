@@ -26,7 +26,7 @@ class Mygento_Cdn_Model_Rewrite_Widget_Template_Filter extends Mage_Widget_Model
                 return $adapter->getUrl($filename);
             } else {
                 $targetFile = Mage::helper('mycdn')->getRelativeFile($filename);
-                $result = $adapter->uploadFile($filename, $targetFile);
+                $result = $adapter->uploadFileAsync($filename, $targetFile);
                 if ($result) {
                     return $adapter->getUrl($filename);
                 }

@@ -19,9 +19,10 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         if (!$adapter) {
             return parent::_mergeFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter);
         }
-        $result = $adapter->uploadFile($temp, $targetFile, $content_type);
+        $result = $adapter->uploadFileAsync($temp, $targetFile, $content_type);
         Mage::helper('mycdn')->addLog($targetFile . ' upload result as ' . $content_type . ' =>' . ($result ? 'true' : 'false'));
-        if ($result) {
+        $async = Mage::getStoreConfig('mycdn/general/async');
+        if ($result && !$async) {
             $ioObject = new Varien_Io_File();
             $ioObject->rm($temp);
         }

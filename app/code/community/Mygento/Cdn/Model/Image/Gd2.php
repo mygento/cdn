@@ -34,8 +34,9 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         if (!$adapter) {
             return parent::save($destination, $newName);
         }
-        $result = $adapter->uploadFile($temp, $fileName);
-        if ($result) {
+        $result = $adapter->uploadFileAsync($temp, $fileName, null, 1);
+        $async = Mage::getStoreConfig('mycdn/general/async');
+        if ($result && !$async) {
             $ioObject = new Varien_Io_File();
             $ioObject->rm($temp);
         }

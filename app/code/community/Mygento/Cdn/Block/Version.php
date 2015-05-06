@@ -6,7 +6,14 @@ class Mygento_Cdn_Block_Version extends Mage_Adminhtml_Block_Abstract implements
     private $_name = 'cdn';
     private $_full = 'Mygento_Cdn';
     private $_url = '/modules/cdn.html';
-
+    
+    /**
+     *
+     * @param Varien_Data_Form_Element_Abstract $element
+     * @return string
+     *
+     * @SuppressWarnings("unused")
+     */
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
         if ($curl = curl_init()) {

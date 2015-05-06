@@ -3,6 +3,27 @@
 class Mygento_Cdn_Model_Observer
 {
 
+    public function processJob()
+    {
+        if (!Mage::getStoreConfig('mycdn/general/enabled')) {
+            return;
+        }
+
+        if (!Mage::getStoreConfig('mycdn/general/async')) {
+            return;
+        }
+        
+        Mage::helper('mycdn')->addLog('[CRON] starting');
+
+
+        $collection = Mage::getModel('mycdn/job')->getCollection();
+        foreach ($collection as $job) {
+            $job->uploadFile();
+        }
+        
+        Mage::helper('mycdn')->addLog('[CRON] stop');
+    }
+
     public function uploadOnSave($observer)
     {
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {

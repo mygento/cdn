@@ -72,7 +72,7 @@ class Mygento_Cdn_Model_Adapter
     public function uploadFile($file, $uploadName, $content_type = null)
     {
         Varien_Profiler::start('cdn_upload_file_' . $uploadName);
-        Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as ' . $content_type);
+        Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as type ' . $content_type);
         $adapter = $this->getAdapter();
         if ($adapter) {
             //Mage::helper('mycdn')->addLog('chosing adapter: ' . get_class($adapter));
@@ -88,5 +88,17 @@ class Mygento_Cdn_Model_Adapter
             Varien_Profiler::stop('cdn_upload_file_' . $uploadName);
             return $result;
         }
+    }
+
+    public function uploadFileAsync($file, $uploadName, $content_type = null, $delete = 0)
+    {
+        if (Mage::getStoreConfig('mycdn/general/async')) {
+            $job = Mage::getModel('mycdn/job')->loadByUploadName($uploadName);
+            if (!$job->getId()) {
+                $job->setData(array('filename' => $file, 'uploadname' => Mage::helper('mycdn')->getRelativeFile($uploadName), 'content_type' => $content_type, 'delete' => $delete))->save();
+            }
+            return false;
+        }
+        return $this->uploadFile($file, $uploadName, $content_type);
     }
 }

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mygento_Cdn>
-            <version>1.4.0</version>
+            <version>1.5.0</version>
         </Mygento_Cdn>
     </modules>
     <global>
@@ -19,7 +19,17 @@
         <models>
             <mycdn>
                 <class>Mygento_Cdn_Model</class>
+                <resourceModel>mycdn_resource</resourceModel>
             </mycdn>
+            <mycdn_resource>
+                <class>Mygento_Cdn_Model_Resource</class>
+                <deprecatedNode>mycdn_mysql4</deprecatedNode>
+                <entities>
+                    <job>
+                        <table>mygento_cdn_job</table>
+                    </job>
+                </entities>
+            </mycdn_resource>
             <catalog>
                 <rewrite>
                     <product_image>Mygento_Cdn_Model_Rewrite_Catalog_Product_Image</product_image>
@@ -40,7 +50,7 @@
             <types>
                 <mycdn>
                     <label>Mygento CDN Storage</label>
-                    <description>Mygento CDN Storage DESCRIPTION</description>
+                    <description>CDN cached urls</description>
                     <tags>MYCDN</tags>
                 </mycdn>
             </types>
@@ -56,6 +66,26 @@
                 </observers>
             </catalog_product_media_save_before>
         </events>
+        <resources>
+            <mycdn_setup>
+                <setup>
+                    <module>Mygento_Cdn</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mycdn_setup>
+            <mycdn_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mycdn_write>
+            <mycdn_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mycdn_read>
+        </resources>
     </global>
     <adminhtml>
         <translate>
@@ -98,6 +128,18 @@
             </modules>
         </translate>
     </frontend>
+    <crontab>
+        <jobs>
+            <mygento_cdn_uploadfile>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>mycdn/observer::processJob</model>
+                </run>
+            </mygento_cdn_uploadfile>	
+        </jobs>
+    </crontab>
     <phpunit>
         <suite>
             <modules>
