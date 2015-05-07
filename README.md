@@ -20,7 +20,7 @@ Features
 - Upload CSS merge cache in CDN and replace url ✓
 - Upload on product image save and download source image if absent ✓
 - Upload wysiwyg images and CMS media directives ✓
-- Async upload
+- Async upload ✓
 - Mage::getBaseUrl('media') 
 - Favicon
 - Mage::getSkinUrl
