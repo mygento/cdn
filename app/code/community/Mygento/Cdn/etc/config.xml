@@ -5,6 +5,15 @@
             <version>1.5.0</version>
         </Mygento_Cdn>
     </modules>
+    <default>
+        <mycdn>
+            <general>
+                <enabled>0</enabled>
+                <debug>0</debug>
+                <async>0</async>
+            </general>
+        </mycdn>
+    </default>
     <global>
         <blocks>
             <mycdn>

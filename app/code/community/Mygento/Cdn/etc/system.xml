@@ -11,7 +11,7 @@
     </tabs>
     <sections>
         <mycdn module="mycdn" translate="label">
-            <label>Configuration CDN</label>
+            <label>CDN</label>
             <tab>allmygento</tab>
             <sort_order>90</sort_order>
             <show_in_default>1</show_in_default>
