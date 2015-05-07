@@ -137,7 +137,7 @@
                 <run>
                     <model>mycdn/observer::processJob</model>
                 </run>
-            </mygento_cdn_uploadfile>	
+            </mygento_cdn_uploadfile>
         </jobs>
     </crontab>
     <phpunit>

@@ -33,6 +33,8 @@ class Mygento_Cdn_Model_Adapter
         Mage::helper('mycdn')->addLog('checking cache for file ' . $fileName);
         if (Mage::app()->getCache()->load('cdn_' . $fileName)) {
             Mage::helper('mycdn')->addLog('[cached] ' . $fileName);
+        } else {
+            Mage::helper('mycdn')->addLog('[non cached] ' . $fileName);
         }
         return Mage::app()->getCache()->load('cdn_' . $fileName);
     }
@@ -93,9 +95,10 @@ class Mygento_Cdn_Model_Adapter
     public function uploadFileAsync($file, $uploadName, $content_type = null, $delete = 0)
     {
         if (Mage::getStoreConfig('mycdn/general/async')) {
-            $job = Mage::getModel('mycdn/job')->loadByUploadName($uploadName);
+            $uploadFile = Mage::helper('mycdn')->getRelativeFile($uploadName);
+            $job = Mage::getModel('mycdn/job')->loadByUploadName($uploadFile);
             if (!$job->getId()) {
-                $job->setData(array('filename' => $file, 'uploadname' => Mage::helper('mycdn')->getRelativeFile($uploadName), 'content_type' => $content_type, 'delete' => $delete))->save();
+                $job->setData(array('filename' => $file, 'uploadname' => $uploadFile, 'content_type' => $content_type, 'delete' => $delete))->save();
             }
             return false;
         }

@@ -45,6 +45,9 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::getUrl();
         }
+        if (!$this->isCached()) {
+            return parent::getUrl();
+        }
 
         return Mage::getModel('mycdn/adapter')->getUrl($this->_newFile);
     }
