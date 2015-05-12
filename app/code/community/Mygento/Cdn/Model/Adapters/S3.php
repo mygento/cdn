@@ -34,7 +34,10 @@ class Mygento_Cdn_Model_Adapters_S3
             Mygento_S3::setAuth($this->accessKey, $this->secretKey);
         }
         $file = Mygento_S3::getObject($this->bucketName, $downloadName);
-        return $file->body;
+        if ($file) {
+            return $file->body;
+        }
+        return null;
     }
 
     public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')

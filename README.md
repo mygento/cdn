@@ -24,6 +24,7 @@ Features
 - Mage::getBaseUrl('media') 
 - Favicon
 - Mage::getSkinUrl
+- Category Images
 
 
 ### Install a module in your project
