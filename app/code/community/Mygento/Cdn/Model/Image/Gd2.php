@@ -8,6 +8,8 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::save($destination, $newName);
         }
+        $orig_destination = $destination;
+        $orig_newName = $newName;
 
         $temp = tempnam(sys_get_temp_dir(), 'cdn');
         parent::save($temp);
@@ -25,7 +27,7 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         } else {
             $fileName = $this->_fileSrcPath . $this->_fileSrcName;
         }
-        $this->uploadfile($destination, $newName, $temp, $fileName);
+        $this->uploadfile($orig_destination, $orig_newName, $temp, $fileName);
     }
 
     private function uploadfile($destination, $newName, $temp, $fileName)
@@ -39,6 +41,9 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         if ($result && !$async) {
             $ioObject = new Varien_Io_File();
             $ioObject->rm($temp);
+        }
+        if (!$result) {
+            return parent::save($destination, $newName);
         }
     }
 }
