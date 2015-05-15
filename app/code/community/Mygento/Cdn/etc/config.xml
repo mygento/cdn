@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mygento_Cdn>
-            <version>1.5.0</version>
+            <version>1.5.1</version>
         </Mygento_Cdn>
     </modules>
     <default>
@@ -141,7 +141,7 @@
         <jobs>
             <mygento_cdn_uploadfile>
                 <schedule>
-                    <cron_expr>* * * * *</cron_expr>
+                    <cron_expr>*/2 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>mycdn/observer::processJob</model>
