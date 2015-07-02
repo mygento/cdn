@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "magento-hackathon/magento-composer-installer": "*"
+        "magento-hackathon/magento-composer-installer": "3.0.2"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",

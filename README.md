@@ -25,6 +25,8 @@ Features
 - Favicon
 - Mage::getSkinUrl
 - Category Images
+- Gzip compress (S3-only) ✓
+- Expires (S3-only)
 
 
 ### Install a module in your project

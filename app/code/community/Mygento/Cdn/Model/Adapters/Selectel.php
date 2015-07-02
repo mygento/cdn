@@ -33,6 +33,10 @@ class Mygento_Cdn_Model_Adapters_Selectel
         return $result['content'];
     }
 
+    /**
+     *
+     * @SuppressWarnings("unused")
+     */
     public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
         if ($this->user == null || $this->pass == null) {

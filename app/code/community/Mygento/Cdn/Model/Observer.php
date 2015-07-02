@@ -17,7 +17,6 @@ class Mygento_Cdn_Model_Observer
 
 
         $collection = Mage::getModel('mycdn/job')->getCollection();
-        //todo check collection size
         foreach ($collection as $job) {
             $job->uploadFile();
         }

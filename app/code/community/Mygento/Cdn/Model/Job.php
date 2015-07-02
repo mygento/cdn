@@ -36,7 +36,9 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
         if (!$adapter) {
             return;
         }
-        if (!is_file($this->getData('filename'))) {
+        $ioObject = new Varien_Io_File();
+        $ioObject->open(array('path' => $ioObject->dirname($this->getData('filename'))));
+        if (!($ioObject->fileExists($this->getData('filename'), true))) {
             Mage::helper('mycdn')->addLog('[CRON] No file ' . $this->getData('filename'));
             $this->delete();
             return;
@@ -47,7 +49,6 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
         $result = $adapter->uploadFile($this->getData('filename'), $this->getData('uploadname'), $this->getData('content_type'));
 
         if ($result && $this->getData('delete')) {
-            $ioObject = new Varien_Io_File();
             $ioObject->rm($this->getData('filename'));
         }
 
