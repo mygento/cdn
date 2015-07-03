@@ -5,7 +5,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
 
     private function processFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $content_type = null)
     {
-        $temp = tempnam(sys_get_temp_dir(), 'cdn');
+        $temp = tempnam(Mage::getConfig()->getOptions()->getTmpDir(), 'CDN_');
         Mage::helper('mycdn')->addLog('merging to ' . $targetFile);
 
         Mage::helper('core')->mergeFiles($srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter);

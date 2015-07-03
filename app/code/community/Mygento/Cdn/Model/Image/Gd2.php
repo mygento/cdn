@@ -11,7 +11,7 @@ class Mygento_Cdn_Model_Image_Gd2 extends Varien_Image_Adapter_Gd2
         $orig_destination = $destination;
         $orig_newName = $newName;
 
-        $temp = tempnam(sys_get_temp_dir(), 'cdn');
+        $temp = tempnam(Mage::getConfig()->getOptions()->getTmpDir(), 'CDN_');
         parent::save($temp);
 
         $fileName = (!isset($destination) ) ? $this->_fileName : $destination;

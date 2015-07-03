@@ -55,6 +55,7 @@ class Mygento_Cdn_Model_Adapters_S3
                 case 'text/css':
                     Mage::helper('mycdn')->gzipFile($file);
                     $headers['Content-Encoding'] = 'gzip';
+                    $file.='_gz';
                     break;
             }
         }
