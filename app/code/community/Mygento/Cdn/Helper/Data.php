@@ -25,11 +25,9 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Minify & gzip the data & (optionally) saves it to a file.
+     * Gzip the data
      *
-     * @param  string[optional] $path Path to write the data to.
-     * @param  int[optional]    $level Compression level, from 0 to 9.
-     * @return string           The minified & gzipped data.
+     * @param  string $path Path to read-write the data to.
      */
     public function gzipFile($path)
     {

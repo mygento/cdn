@@ -13,7 +13,7 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
      * Load entity by attribute
      *
      * @param type $name
-     * @return boolean
+     * @return Mygento_Cdn_Model_Job
      *
      */
     public function loadByUploadName($name)

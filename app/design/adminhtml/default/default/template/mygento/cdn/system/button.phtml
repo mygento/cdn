@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function showMessage(txt, type) {
+        var html = '<ul class="messages"><li class="' + type + '-msg"><ul><li>' + txt + '</li></ul></li></ul>';
+        $('messages').update(html);
+    }
+    function upd_<?php echo $this->model; ?>() {
+        new Ajax.Request('<?php echo $this->getAjaxUrl() ?>', {
+            method: 'get',
+            onSuccess: function (transport) {
+                if (transport.responseText === 'success') {
+                    showMessage('<?php echo $this->__('Upload complete'); ?>', 'success');
+                } else {
+                    showMessage(transport.responseText, 'error');
+                }
+            }
+        });
+    }
+    //]]>
+</script>

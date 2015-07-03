@@ -77,8 +77,11 @@ class Mygento_Cdn_Model_Adapter
         Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as type ' . $content_type);
         $adapter = $this->getAdapter();
         if ($adapter) {
-            //Mage::helper('mycdn')->addLog('chosing adapter: ' . get_class($adapter));
             $filename = Mage::helper('mycdn')->getRelativeFile($uploadName);
+            $size = new Zend_Validate_File_Size(array('min' => Mage::getStoreConfig('mycdn/general/min')));
+            if (!$size->isValid($file)) {
+                return false;
+            }
             $result = $adapter->uploadFile($file, $filename, $content_type);
             if ($result) {
                 Mage::helper('mycdn')->addLog('uploaded successfully ' . $filename);
@@ -103,5 +106,22 @@ class Mygento_Cdn_Model_Adapter
             return false;
         }
         return $this->uploadFile($file, $uploadName, $content_type);
+    }
+
+    public function getFileListRecursive($folder)
+    {
+        $iter = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($folder, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST,
+            RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+        );
+
+        $paths = array();
+        foreach ($iter as $path => $dir) {
+            if (!$dir->isDir()) {
+                $paths[$path] = $dir->getExtension();
+            }
+        }
+        return $paths;
     }
 }

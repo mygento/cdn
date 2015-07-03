@@ -11,7 +11,11 @@
                 <enabled>0</enabled>
                 <debug>0</debug>
                 <async>0</async>
+                <min>1000</min>
             </general>
+            <s3>
+                <gzip>1</gzip>
+            </s3>
         </mycdn>
     </default>
     <global>
@@ -96,6 +100,17 @@
             </mycdn_read>
         </resources>
     </global>
+    <admin>
+        <routers>
+            <mycdn>
+                <use>admin</use>
+                <args>
+                    <module>Mygento_Cdn</module>
+                    <frontName>mycdn</frontName>
+                </args>
+            </mycdn>
+        </routers>
+    </admin>
     <adminhtml>
         <translate>
             <modules>

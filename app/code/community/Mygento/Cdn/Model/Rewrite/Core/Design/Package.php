@@ -22,7 +22,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         $result = $adapter->uploadFileAsync($temp, $targetFile, $content_type);
         Mage::helper('mycdn')->addLog($targetFile . ' upload result as ' . $content_type . ' =>' . ($result ? 'true' : 'false'));
         $async = Mage::getStoreConfig('mycdn/general/async');
-        if ($result && !$async) {
+        if (!$async) {
             $ioObject = new Varien_Io_File();
             $ioObject->rm($temp);
         }
@@ -51,18 +51,19 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::getMergedJsUrl($files);
         }
+        $path = 'js' . DS . 'merge';
 
         $targetFilename = md5(implode(',', $files)) . '.js';
 
         Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' . ($this->needMerge('js' . DS . $targetFilename) ? 'true' : 'false'));
 
-        if ($this->needMerge('js' . DS . $targetFilename)) {
-            $result = $this->processFiles($files, 'js' . DS . $targetFilename, false, null, 'js', 'application/x-javascript');
+        if ($this->needMerge($path . DS . $targetFilename)) {
+            $result = $this->processFiles($files, $path . DS . $targetFilename, false, null, 'js', 'application/javascript');
             if (!$result) {
                 return parent::getMergedJsUrl($files);
             }
         }
-        return Mage::getModel('mycdn/adapter')->getUrl('js/' . $targetFilename);
+        return Mage::getModel('mycdn/adapter')->getUrl('js/merge/' . $targetFilename);
     }
 
     /**

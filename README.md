@@ -8,8 +8,9 @@ Issues
 
 Working with Adapters
 ========
-- Amazon S3
-- Selectel
+- Amazon S3 ✓
+- Selectel ✓
+- FTP
 
 
 
@@ -21,12 +22,15 @@ Features
 - Upload on product image save and download source image if absent ✓
 - Upload wysiwyg images and CMS media directives ✓
 - Async upload ✓
-- Mage::getBaseUrl('media') 
+- Upload skin folder ✓
+- Upload js folder ✓
+- Gzip compress (S3-only) ✓
+- Mage::getBaseUrl('media')
 - Favicon
 - Mage::getSkinUrl
 - Category Images
-- Gzip compress (S3-only) ✓
 - Expires (S3-only)
+
 
 
 ### Install a module in your project

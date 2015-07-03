@@ -14,6 +14,13 @@ class Mygento_Cdn_Model_Adapters_S3
         $this->bucketName = Mage::getStoreConfig('mycdn/s3/bucket');
     }
 
+    private function setKeys()
+    {
+        if ($this->accessKey !== null && $this->secretKey !== null) {
+            Mygento_S3::setAuth($this->accessKey, $this->secretKey);
+        }
+    }
+
     /**
      * Creates a full URL to the image on the remote server
      *
@@ -30,9 +37,7 @@ class Mygento_Cdn_Model_Adapters_S3
 
     public function downloadFile($downloadName)
     {
-        if ($this->accessKey !== null && $this->secretKey !== null) {
-            Mygento_S3::setAuth($this->accessKey, $this->secretKey);
-        }
+        $this->setKeys();
         $file = Mygento_S3::getObject($this->bucketName, $downloadName);
         if ($file) {
             return $file->body;
@@ -42,13 +47,11 @@ class Mygento_Cdn_Model_Adapters_S3
 
     public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
-        if ($this->accessKey !== null && $this->secretKey !== null) {
-            Mygento_S3::setAuth($this->accessKey, $this->secretKey);
-        }
+        $this->setKeys();
         $headers = array('Content-Type' => $content_type);
         if (Mage::getStoreConfig('mycdn/s3/gzip')) {
             switch ($content_type) {
-                case 'application/x-javascript':
+                case 'application/javascript':
                 case 'text/css':
                     Mage::helper('mycdn')->gzipFile($file);
                     $headers['Content-Encoding'] = 'gzip';
