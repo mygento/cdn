@@ -37,6 +37,7 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
             return;
         }
         $ioObject = new Varien_Io_File();
+        $ioObject->setAllowCreateFolders(true);
         $ioObject->open(array('path' => $ioObject->dirname($this->getData('filename'))));
         if (!($ioObject->fileExists($this->getData('filename'), true))) {
             Mage::helper('mycdn')->addLog('[CRON] No file ' . $this->getData('filename'));

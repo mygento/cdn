@@ -22,6 +22,7 @@ class Mygento_Cdn_Model_Rewrite_Widget_Template_Filter extends Mage_Widget_Model
         $filename = Mage::getBaseDir('media') .'/'. $params['url'];
 
         $ioObject = new Varien_Io_File();
+        $ioObject->setAllowCreateFolders(true);
         $ioObject->open(array('path' => $ioObject->dirname($filename)));
         if ($ioObject->fileExists($filename, true)) {
             if ($adapter->fileExists($filename)) {

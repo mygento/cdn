@@ -65,6 +65,7 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
             return parent::_fileExists($filename);
         }
         $ioObject = new Varien_Io_File();
+        $ioObject->setAllowCreateFolders(true);
         $ioObject->open(array('path' => $ioObject->dirname($filename)));
         if ($ioObject->fileExists($filename, true)) {
             return true;
