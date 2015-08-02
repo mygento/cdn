@@ -11,7 +11,7 @@ class Mygento_Cdn_Model_Source_Expires
 
     public function toOptionArray()
     {
-        $helper = Mage::helper('cdn');
+        $helper = Mage::helper('mycdn');
         return array(
             array('value' => '+1 day', 'label' => $helper->__('Day')),
             array('value' => '+1 week', 'label' => $helper->__('Week')),

@@ -48,11 +48,11 @@ class Mygento_Cdn_Model_Adapters_S3
         $data = array(
             'ACL' => 'public-read',
             'Bucket' => $this->bucketName,
-            'Key' => Mage::getStoreConfig('mycdn/s3/access_key_id'),
+            'Key' => $uploadName,
             'ContentType' => $content_type,
             'SourceFile' => $file,
         );
-        if (Mage::getStoreConfig('mycdn/s3/gzip')) {
+        if (Mage::getStoreConfig('mycdn/general/minify')) {
             switch ($content_type) {
                 case 'application/javascript':
                     $data['Expires'] = Mage::getStoreConfig('mycdn/general/js_expires');
@@ -60,18 +60,22 @@ class Mygento_Cdn_Model_Adapters_S3
                     Mage::helper('mycdn')->gzipFile($file);
                     $data['ContentEncoding'] = 'gzip';
                     $data['Expires'] = Mage::getStoreConfig('mycdn/general/css_expires');
-                    $file.='.gz';
+                    $data['SourceFile'] = $file . '.gz';
                     break;
                 case 'image/jpeg':
                 case 'image/png':
                 case 'image/svg+xml':
-                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/image_expires');
+                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
                     break;
+                default:
+                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
             }
         }
-        $this->client->putObject($data);
-
-
-        //return Mygento_S3::putObject(Mygento_S3::inputFile($file, false), $this->bucketName, $uploadName, Mygento_S3::ACL_PUBLIC_READ, array(), $headers);
+        $result = $this->client->putObject($data);
+        $code = $result->get("@metadata")['statusCode'];
+        if ($code >= 200 && $code < 300) {
+            return true;
+        }
+        return false;
     }
 }

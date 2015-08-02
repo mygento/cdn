@@ -31,7 +31,7 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function gzipFile($path)
     {
-        $gz = new Mage_Archive_Gz();
-        $gz->pack($path, $path . '.gz');
+        $minifier = new MatthiasMullie\Minify\CSS($path);
+        $minifier->gzip($path . '.gz');
     }
 }
