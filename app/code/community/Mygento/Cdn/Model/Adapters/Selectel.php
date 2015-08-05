@@ -33,17 +33,22 @@ class Mygento_Cdn_Model_Adapters_Selectel
         return $result['content'];
     }
 
-    /**
-     *
-     * @SuppressWarnings("unused")
-     */
-    public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
+    public function uploadFile($file, $uploadName, $content_type)
     {
         if ($this->user == null || $this->pass == null) {
             return false;
         }
         $storage = new Mygento_SelectelStorage($this->user, $this->pass);
         $container = $storage->getContainer($this->bucketName);
+        if (Mage::getStoreConfig('mycdn/general/minify')) {
+            switch ($content_type) {
+                case 'application/javascript':
+                case 'text/css':
+                    Mage::helper('mycdn')->minifyFile($file);
+                    $file.='.min';
+                    break;
+            }
+        }
         return $container->putFile($file, $uploadName);
     }
 }

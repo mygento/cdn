@@ -9,7 +9,7 @@ Issues
 Working with Adapters
 ========
 - Amazon S3 ✓
-- Selectel ✓
+- Selectel  ✓
 - FTP
 
 
@@ -24,12 +24,12 @@ Features
 - Async upload ✓
 - Upload skin folder ✓
 - Upload js folder ✓
-- Gzip compress (S3-only) ✓
+- Gzip && Minification ✓
+- Expires (S3-only) ✓
 - Mage::getBaseUrl('media')
 - Favicon
 - Mage::getSkinUrl
 - Category Images
-- Expires (S3-only)
 
 
 
@@ -40,7 +40,7 @@ set up your root ```composer.json``` in your project like this:
 ```json
 {
     "require": {
-        "mygento/cdn": "*",
+        "mygento/cdn": "1.*",
     },
     "repositories": [
         {

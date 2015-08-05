@@ -34,4 +34,15 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
         $minifier = new MatthiasMullie\Minify\CSS($path);
         $minifier->gzip($path . '.gz');
     }
+
+    /**
+     * Minify the data
+     *
+     * @param  string $path Path to read-write the data to.
+     */
+    public function minifyFile($path)
+    {
+        $minifier = new MatthiasMullie\Minify\CSS($path);
+        $minifier->minify($path . '.min');
+    }
 }
