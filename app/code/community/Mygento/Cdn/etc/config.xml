@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mygento_Cdn>
-            <version>1.5.1</version>
+            <version>1.6.0</version>
         </Mygento_Cdn>
     </modules>
     <default>
