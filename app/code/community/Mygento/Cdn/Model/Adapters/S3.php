@@ -62,11 +62,15 @@ class Mygento_Cdn_Model_Adapters_S3
         if (Mage::getStoreConfig('mycdn/general/minify')) {
             switch ($content_type) {
                 case 'application/javascript':
+                    Mage::helper('mycdn')->gzipFile($file);
                     $data['Expires'] = Mage::getStoreConfig('mycdn/general/js_expires');
+                    $data['ContentEncoding'] = 'gzip';
+                    $data['SourceFile'] = $file . '.gz';
+                    break;
                 case 'text/css':
                     Mage::helper('mycdn')->gzipFile($file);
-                    $data['ContentEncoding'] = 'gzip';
                     $data['Expires'] = Mage::getStoreConfig('mycdn/general/css_expires');
+                    $data['ContentEncoding'] = 'gzip';
                     $data['SourceFile'] = $file . '.gz';
                     break;
                 case 'image/jpeg':
