@@ -35,10 +35,17 @@ class Mygento_Cdn_Model_Adapters_S3
 
     public function downloadFile($downloadName)
     {
-        $this->setKeys();
-        $file = Mygento_S3::getObject($this->bucketName, $downloadName);
-        if ($file) {
-            return $file->body;
+        $data = array(
+            'Bucket' => $this->bucketName,
+            'Key' => $downloadName,
+        );
+        try {
+            $result = $this->client->getObject($data);
+        } catch (Exception $e) {
+            return null;
+        }
+        if ($result) {
+            return $result['Body'];
         }
         return null;
     }

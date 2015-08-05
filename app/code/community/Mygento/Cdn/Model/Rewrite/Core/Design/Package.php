@@ -80,7 +80,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
 
         // secure or unsecure
         $isSecure = Mage::app()->getRequest()->isSecure();
-        $mergerDir = $isSecure ? 'css_secure' : 'css';
+        $mergerDir = $isSecure ? 'merge/css_secure' : 'merge/css';
 
         $targetFilename = md5(implode(',', $files)) . '.css';
         Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' . ($this->needMerge($mergerDir . DS . $targetFilename) ? 'true' : 'false'));
