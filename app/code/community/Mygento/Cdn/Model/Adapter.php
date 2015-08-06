@@ -74,7 +74,7 @@ class Mygento_Cdn_Model_Adapter
     public function uploadFile($file, $uploadName, $content_type = null)
     {
         Varien_Profiler::start('cdn_upload_file_' . $uploadName);
-        if($content_type == null){
+        if ($content_type == null) {
             $content_type = Mage::helper('mycdn')->detectFileMimeType($file);
         }
         Mage::helper('mycdn')->addLog('uploading ' . Mage::helper('mycdn')->getRelativeFile($uploadName) . ' as type ' . $content_type);
