@@ -75,6 +75,7 @@ class Mygento_Cdn_Model_Adapters_S3
                     break;
                 case 'image/jpeg':
                 case 'image/png':
+                case 'image/gif':
                 case 'image/svg+xml':
                     $data['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
                     break;
