@@ -58,11 +58,7 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function gzipFile($path, $type)
     {
-        if ('text/css' === $type) {
-            $minifier = new MatthiasMullie\Minify\CSS($path);
-        } else {
-            $minifier = new MatthiasMullie\Minify\JS($path);
-        }
+        $minifier = $this->getMinifier($path, $type);
         $minifier->gzip($path . '.gz');
     }
 
@@ -74,11 +70,23 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function minifyFile($path, $type)
     {
-        if ('text/css' === $type) {
-            $minifier = new MatthiasMullie\Minify\CSS($path);
-        } else {
-            $minifier = new MatthiasMullie\Minify\JS($path);
-        }
+        $minifier = $this->getMinifier($path, $type);
         $minifier->minify($path . '.min');
+    }
+
+    /**
+     * Get Minifier
+     *
+     * @param type $path
+     * @param type $type
+     * @return \MatthiasMullie\Minify\CSS|\MatthiasMullie\Minify\JS
+     */
+    private function getMinifier($path, $type)
+    {
+        if ('text/css' === $type) {
+            return new MatthiasMullie\Minify\CSS($path);
+        } else {
+            return new MatthiasMullie\Minify\JS($path);
+        }
     }
 }
