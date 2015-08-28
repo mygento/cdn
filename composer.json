@@ -3,7 +3,7 @@
     "type": "magento-module",
     "license": "Apache-2.0",
     "homepage": "https://github.com/mygento/cdn.git",
-    "description": "CDN module",
+    "description": "Magento CDN module",
     "keywords": [
         "magento",
         "cdn",
@@ -25,7 +25,8 @@
         }
     ],
     "require": {
-        "magento-hackathon/magento-composer-installer": "*",
+	"php": ">=5.5",
+        "magento-hackathon/magento-composer-installer": "3.*",
         "aws/aws-sdk-php": "3.*",
         "matthiasmullie/minify": "^1.3"
     },

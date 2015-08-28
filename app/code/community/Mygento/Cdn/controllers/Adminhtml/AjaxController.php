@@ -3,6 +3,11 @@
 class Mygento_Cdn_Adminhtml_AjaxController extends Mage_Adminhtml_Controller_Action
 {
 
+    protected function _isAllowed()
+    {
+        return true;
+    }
+
     public function skinAction()
     {
         $adapter = Mage::getModel('mycdn/adapter');

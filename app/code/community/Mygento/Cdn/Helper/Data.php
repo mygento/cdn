@@ -54,10 +54,15 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      * Gzip the data
      *
      * @param  string $path Path to read-write the data to.
+     * @param  string $type Content-Type
      */
-    public function gzipFile($path)
+    public function gzipFile($path, $type)
     {
-        $minifier = new MatthiasMullie\Minify\CSS($path);
+        if ('text/css' === $type) {
+            $minifier = new MatthiasMullie\Minify\CSS($path);
+        } else {
+            $minifier = new MatthiasMullie\Minify\JS($path);
+        }
         $minifier->gzip($path . '.gz');
     }
 
@@ -65,10 +70,15 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      * Minify the data
      *
      * @param  string $path Path to read-write the data to.
+     * @param  string $type Content-Type
      */
-    public function minifyFile($path)
+    public function minifyFile($path, $type)
     {
-        $minifier = new MatthiasMullie\Minify\CSS($path);
+        if ('text/css' === $type) {
+            $minifier = new MatthiasMullie\Minify\CSS($path);
+        } else {
+            $minifier = new MatthiasMullie\Minify\JS($path);
+        }
         $minifier->minify($path . '.min');
     }
 }

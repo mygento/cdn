@@ -52,42 +52,55 @@ class Mygento_Cdn_Model_Adapters_S3
 
     public function uploadFile($file, $uploadName, $content_type = 'application/octet-stream')
     {
-        $data = array(
+        $params = [
             'ACL' => 'public-read',
             'Bucket' => $this->bucketName,
             'Key' => $uploadName,
             'ContentType' => $content_type,
             'SourceFile' => $file,
-        );
-        if (Mage::getStoreConfig('mycdn/general/minify')) {
-            switch ($content_type) {
-                case 'application/javascript':
-                    Mage::helper('mycdn')->gzipFile($file);
-                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/js_expires');
-                    $data['ContentEncoding'] = 'gzip';
-                    $data['SourceFile'] = $file . '.gz';
-                    break;
-                case 'text/css':
-                    Mage::helper('mycdn')->gzipFile($file);
-                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/css_expires');
-                    $data['ContentEncoding'] = 'gzip';
-                    $data['SourceFile'] = $file . '.gz';
-                    break;
-                case 'image/jpeg':
-                case 'image/png':
-                case 'image/gif':
-                case 'image/svg+xml':
-                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
-                    break;
-                default:
-                    $data['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
-            }
+        ];
+
+        switch ($content_type) {
+            case 'application/javascript':
+                $params['Expires'] = Mage::getStoreConfig('mycdn/general/js_expires');
+                break;
+            case 'text/css':
+                $params['Expires'] = Mage::getStoreConfig('mycdn/general/css_expires');
+                break;
+            case 'image/jpeg':
+            case 'image/png':
+            case 'image/gif':
+            case 'image/svg+xml':
+                $params['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
+                break;
+            default:
+                $params['Expires'] = Mage::getStoreConfig('mycdn/general/images_expires');
         }
+        $data = $this->minify($params, $file, $content_type);
         $result = $this->client->putObject($data);
         $code = $result->get("@metadata")['statusCode'];
         if ($code >= 200 && $code < 300) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Minify and Gzip file before upload
+     *
+     * @param type $data
+     * @param type $file
+     * @param type $content_type
+     * @return type
+     */
+    private function minify($data, $file, $content_type)
+    {
+        if (!Mage::getStoreConfig('mycdn/general/minify')) {
+            return $data;
+        }
+        Mage::helper('mycdn')->gzipFile($file, $content_type);
+        $data['ContentEncoding'] = 'gzip';
+        $data['SourceFile'] = $file . '.gz';
+        return $data;
     }
 }

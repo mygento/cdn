@@ -44,7 +44,7 @@ class Mygento_Cdn_Model_Adapters_Selectel
             switch ($content_type) {
                 case 'application/javascript':
                 case 'text/css':
-                    Mage::helper('mycdn')->minifyFile($file);
+                    Mage::helper('mycdn')->minifyFile($file, $content_type);
                     $file.='.min';
                     break;
             }

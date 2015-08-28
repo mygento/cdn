@@ -2,6 +2,7 @@
 
 class Mygento_Cdn_Model_Image extends Varien_Image
 {
+
     /**
      *
      * @SuppressWarnings("unused")

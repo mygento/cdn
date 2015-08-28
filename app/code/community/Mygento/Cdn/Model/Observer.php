@@ -12,7 +12,7 @@ class Mygento_Cdn_Model_Observer
         if (!Mage::getStoreConfig('mycdn/general/async')) {
             return;
         }
-        
+
         Mage::helper('mycdn')->addLog('[CRON] starting');
 
 
@@ -20,7 +20,7 @@ class Mygento_Cdn_Model_Observer
         foreach ($collection as $job) {
             $job->uploadFile();
         }
-        
+
         Mage::helper('mycdn')->addLog('[CRON] stop');
     }
 
