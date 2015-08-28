@@ -3,6 +3,43 @@
 class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
+    const CACHETAG = 'MYCDN';
+
+    /**
+     * Check is file in cache
+     *
+     * @param string $fileName
+     * @return boolean
+     */
+    public function checkPathInCache($file)
+    {
+        if (!Mage::app()->useCache(self::CACHETAG)) {
+            return false;
+        }
+        $fileName = $this->getRelativeFile($file);
+        if (Mage::app()->getCache()->load('cdn_' . $fileName)) {
+            Mage::helper('mycdn')->addLog('[CACHED] ' . $fileName);
+            return true;
+        }
+        Mage::helper('mycdn')->addLog('[NOT_CACHED] ' . $fileName);
+        return false;
+    }
+
+    /**
+     * Save file in cache
+     *
+     * @param string $fileName
+     * @param string $url
+     * @return boolean
+     */
+    public function savePathInCache($fileName, $url)
+    {
+        if (!Mage::app()->useCache(self::CACHETAG)) {
+            return false;
+        }
+        Mage::app()->getCache()->save($url, 'cdn_' . $filename, array(self::CACHETAG));
+    }
+
     public function addLog($text)
     {
         if (Mage::getStoreConfig('mycdn/general/debug')) {

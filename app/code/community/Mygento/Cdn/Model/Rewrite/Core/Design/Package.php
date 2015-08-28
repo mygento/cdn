@@ -32,12 +32,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
 
     private function needMerge($file)
     {
-        $fileName = Mage::helper('mycdn')->getRelativeFile($file);
-        Mage::helper('mycdn')->addLog('checking cache for file ' . $fileName);
-        if (Mage::app()->getCache()->load('cdn_' . $fileName)) {
-            Mage::helper('mycdn')->addLog('[cached] ' . $fileName);
-        }
-        return !(Mage::app()->getCache()->load('cdn_' . $fileName));
+        return !(Mage::helper('mycdn')->checkPathInCache($file));
     }
 
     /**
