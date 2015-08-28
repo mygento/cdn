@@ -6,8 +6,8 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
     private function processFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $content_type = null)
     {
         $temp = tempnam(Mage::getConfig()->getOptions()->getTmpDir(), 'CDN_');
-        Mage::helper('mycdn')->addLog('merging to ' . $targetFile);
 
+        Mage::helper('mycdn')->addLog('[MERGE] to ' . $targetFile);
         Mage::helper('core')->mergeFiles($srcFiles, $temp, true, $beforeMergeCallback, $extensionsFilter);
 
         return $this->uploadfile($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter, $temp, $content_type);
@@ -20,7 +20,6 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
             return parent::_mergeFiles($srcFiles, $targetFile, $mustMerge, $beforeMergeCallback, $extensionsFilter);
         }
         $result = $adapter->uploadFileAsync($temp, $targetFile, $content_type);
-        Mage::helper('mycdn')->addLog($targetFile . ' upload result as ' . $content_type . ' =>' . ($result ? 'true' : 'false'));
         $async = Mage::getStoreConfig('mycdn/general/async');
         if (!$async) {
             $ioObject = new Varien_Io_File();
@@ -50,7 +49,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
 
         $targetFilename = md5(implode(',', $files)) . '.js';
 
-        Mage::helper('mycdn')->addLog($targetFilename . ' need to merge =>  ' . ($this->needMerge('js' . DS . $targetFilename) ? 'true' : 'false'));
+        Mage::helper('mycdn')->addLog('Need to merge ' . $targetFilename . ' =>  ' . ($this->needMerge('js' . DS . $targetFilename) ? 'true' : 'false'));
 
         if ($this->needMerge($path . DS . $targetFilename)) {
             $result = $this->processFiles($files, $path . DS . $targetFilename, false, null, 'js', 'application/javascript');

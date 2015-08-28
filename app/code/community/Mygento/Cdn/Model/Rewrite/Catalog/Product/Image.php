@@ -70,7 +70,7 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         if ($ioObject->fileExists($filename, true)) {
             return true;
         } else {
-            Mage::helper('mycdn')->addLog('[download] no source on server -> ' . $filename);
+            Mage::helper('mycdn')->addLog('[NEED TO DOWNLOAD] no source on server -> ' . $filename);
             return Mage::helper('mycdn')->getCdnFile($filename);
         }
     }

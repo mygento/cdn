@@ -157,7 +157,7 @@
         <jobs>
             <mygento_cdn_uploadfile>
                 <schedule>
-                    <cron_expr>*/2 * * * *</cron_expr>
+                    <cron_expr>* * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>mycdn/observer::processJob</model>

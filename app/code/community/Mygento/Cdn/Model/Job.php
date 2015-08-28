@@ -45,16 +45,17 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
             return;
         }
 
-        Mage::helper('mycdn')->addLog('[CRON] processing id = ' . $this->getId());
-        Mage::helper('mycdn')->addLog($this->getData());
+        //Mage::helper('mycdn')->addLog('[CRON] processing id = ' . $this->getId());
+        //Mage::helper('mycdn')->addLog($this->getData());
         $result = $adapter->uploadFile($this->getData('filename'), $this->getData('uploadname'), $this->getData('content_type'));
 
         if ($result && $this->getData('delete')) {
             $ioObject->rm($this->getData('filename'));
+            Mage::helper('mycdn')->addLog('[DELETE] CRON delete for ' . $this->getData('filename'));
         }
 
         if ($result) {
-            Mage::helper('mycdn')->addLog('[CRON] delete ' . $this->getData('filename'));
+            Mage::helper('mycdn')->addLog('[JOB] CRON delete job for ' . $this->getData('filename'));
             $this->delete();
         }
     }

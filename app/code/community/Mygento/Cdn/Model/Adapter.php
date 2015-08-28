@@ -92,7 +92,6 @@ class Mygento_Cdn_Model_Adapter
             $result = $adapter->uploadFile($file, $fileName, $content_type);
             if ($result) {
                 Mage::helper('mycdn')->addLog('[UPLOADED]' . $fileName);
-                Mage::helper('mycdn')->addLog('saving to cache ' . $filename);
 
                 //saving to cache
                 Mage::helper('mycdn')->savePathInCache($fileName, $this->getUrl($fileName));
@@ -121,7 +120,9 @@ class Mygento_Cdn_Model_Adapter
 
             //saving cron job
             $job = Mage::getModel('mycdn/job')->loadByUploadName($uploadFile);
-            $job->addData(['filename' => $file, 'uploadname' => $uploadFile, 'content_type' => $content_type, 'delete' => $delete])->save();
+            if (!$job->getId()) {
+                $job->setData(array('filename' => $file, 'uploadname' => $uploadFile, 'content_type' => $content_type, 'delete' => $delete))->save();
+            }
             return false;
         }
         return $this->uploadFile($file, $uploadName, $content_type);

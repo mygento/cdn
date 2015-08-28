@@ -95,8 +95,10 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function gzipFile($path, $type)
     {
+        Varien_Profiler::start('cdn_gzip_file_' . $path);
         $minifier = $this->getMinifier($path, $type);
         $minifier->gzip($path . '.gz');
+        Varien_Profiler::stop('cdn_gzip_file_' . $path);
     }
 
     /**
@@ -107,8 +109,10 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function minifyFile($path, $type)
     {
+        Varien_Profiler::start('cdn_minify_file_' . $path);
         $minifier = $this->getMinifier($path, $type);
         $minifier->minify($path . '.min');
+        Varien_Profiler::stop('cdn_minify_file_' . $path);
     }
 
     /**
