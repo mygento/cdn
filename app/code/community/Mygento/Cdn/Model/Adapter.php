@@ -91,13 +91,13 @@ class Mygento_Cdn_Model_Adapter
             }
             $result = $adapter->uploadFile($file, $fileName, $content_type);
             if ($result) {
-                Mage::helper('mycdn')->addLog('[UPLOADED]' . $fileName);
+                Mage::helper('mycdn')->addLog('[UPLOADED] ' . $fileName);
 
                 //saving to cache
                 Mage::helper('mycdn')->savePathInCache($fileName, $this->getUrl($fileName));
                 return true;
             }
-            Mage::helper('mycdn')->addLog('[NOT UPLOADED]' . $fileName);
+            Mage::helper('mycdn')->addLog('[NOT UPLOADED] ' . $fileName);
 
             Varien_Profiler::stop('cdn_upload_file_' . $uploadName);
             return false;
@@ -136,7 +136,9 @@ class Mygento_Cdn_Model_Adapter
     public function getFileListRecursive($folder)
     {
         $iter = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($folder, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
+            new RecursiveDirectoryIterator($folder, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST,
+            RecursiveIteratorIterator::CATCH_GET_CHILD // Ignore "Permission denied"
         );
 
         $paths = [];

@@ -3,7 +3,8 @@
 class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
-    const CACHETAG = 'MYCDN';
+    const CACHE_TAG = 'MYCDN_URL';
+    const CACHE_GROUP = 'mycdn';
 
     /**
      * Check is file in cache
@@ -13,7 +14,7 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function checkPathInCache($file)
     {
-        if (!Mage::app()->useCache(self::CACHETAG)) {
+        if (!Mage::app()->useCache(self::CACHE_GROUP)) {
             return false;
         }
         $fileName = $this->getRelativeFile($file);
@@ -34,10 +35,22 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function savePathInCache($fileName, $url)
     {
-        if (!Mage::app()->useCache(self::CACHETAG)) {
+        if (!Mage::app()->useCache(self::CACHE_GROUP)) {
             return false;
         }
-        Mage::app()->getCache()->save($url, 'cdn_' . $filename, array(self::CACHETAG));
+        Mage::helper('mycdn')->addLog('[SAVING TO CACHE] ' . $fileName);
+        Mage::app()->getCache()->save($url, 'cdn_' . $fileName, array(self::CACHE_TAG));
+    }
+
+    public function isFileExists($fileName)
+    {
+        $ioObject = new Varien_Io_File();
+        $ioObject->setAllowCreateFolders(true);
+        $ioObject->open(array('path' => $ioObject->dirname($fileName)));
+        if ($ioObject->fileExists($fileName, true)) {
+            return true;
+        }
+        return false;
     }
 
     public function addLog($text)

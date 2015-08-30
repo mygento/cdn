@@ -31,8 +31,18 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::isCached();
         }
-        $adapter = Mage::getModel('mycdn/adapter');
-        return $adapter->fileExists($this->_newFile);
+
+        $cache = Mage::helper('mycdn')->checkPathInCache($this->_newFile);
+
+        if ($cache) {
+            return true;
+        }
+
+        if (Mage::helper('mycdn')->isFileExists($this->_newFile)) {
+            return Mage::getModel('mycdn/adapter')->uploadFileAsync($this->_newFile, $this->_newFile);
+        }
+
+        return false;
     }
 
     /**
@@ -64,14 +74,10 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::_fileExists($filename);
         }
-        $ioObject = new Varien_Io_File();
-        $ioObject->setAllowCreateFolders(true);
-        $ioObject->open(array('path' => $ioObject->dirname($filename)));
-        if ($ioObject->fileExists($filename, true)) {
+        if (Mage::helper('mycdn')->isFileExists($filename)) {
             return true;
-        } else {
-            Mage::helper('mycdn')->addLog('[NEED TO DOWNLOAD] no source on server -> ' . $filename);
-            return Mage::helper('mycdn')->getCdnFile($filename);
         }
+        Mage::helper('mycdn')->addLog('[NEED TO DOWNLOAD] no source on server -> ' . $filename);
+        return Mage::helper('mycdn')->getCdnFile($filename);
     }
 }

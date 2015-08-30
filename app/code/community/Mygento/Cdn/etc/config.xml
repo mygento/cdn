@@ -65,7 +65,7 @@
                 <mycdn>
                     <label>Mygento CDN Storage</label>
                     <description>CDN cached urls</description>
-                    <tags>MYCDN</tags>
+                    <tags>MYCDN_URL</tags>
                 </mycdn>
             </types>
         </cache>

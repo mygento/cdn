@@ -98,9 +98,15 @@ class Mygento_Cdn_Model_Adapters_S3
         if (!Mage::getStoreConfig('mycdn/general/minify')) {
             return $data;
         }
-        Mage::helper('mycdn')->gzipFile($file, $content_type);
-        $data['ContentEncoding'] = 'gzip';
-        $data['SourceFile'] = $file . '.gz';
+        switch ($content_type) {
+            case 'application/javascript':
+            case 'text/css':
+                Mage::helper('mycdn')->gzipFile($file, $content_type);
+                $data['ContentEncoding'] = 'gzip';
+                $data['SourceFile'] = $file . '.gz';
+                break;
+        }
+
         return $data;
     }
 }

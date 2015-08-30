@@ -55,7 +55,7 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
         }
 
         if ($result) {
-            Mage::helper('mycdn')->addLog('[JOB] CRON delete job for ' . $this->getData('filename'));
+            Mage::helper('mycdn')->addLog('[JOB] CRON delete job for ' . $this->getData('filename')."\n");
             $this->delete();
         }
     }
