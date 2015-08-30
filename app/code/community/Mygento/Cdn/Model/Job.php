@@ -36,26 +36,25 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
         if (!$adapter) {
             return;
         }
-        $ioObject = new Varien_Io_File();
-        $ioObject->setAllowCreateFolders(true);
-        $ioObject->open(array('path' => $ioObject->dirname($this->getData('filename'))));
-        if (!($ioObject->fileExists($this->getData('filename'), true))) {
+        if (!(Mage::helper('mycdn')->isFileExists($this->getData('filename')))) {
             Mage::helper('mycdn')->addLog('[CRON] No file ' . $this->getData('filename'));
             $this->delete();
             return;
         }
-
-        //Mage::helper('mycdn')->addLog('[CRON] processing id = ' . $this->getId());
-        //Mage::helper('mycdn')->addLog($this->getData());
-        $result = $adapter->uploadFile($this->getData('filename'), $this->getData('uploadname'), $this->getData('content_type'));
+        $file = $this->getData('filename');
+        $result = $adapter->uploadFile($file, $file, $this->getData('content_type'));
 
         if ($result && $this->getData('delete')) {
-            $ioObject->rm($this->getData('filename'));
-            Mage::helper('mycdn')->addLog('[DELETE] CRON delete for ' . $this->getData('filename'));
+
+            $ioObject = new Varien_Io_File();
+            $ioObject->setAllowCreateFolders(true);
+            $ioObject->open(array('path' => $ioObject->dirname($file)));
+            $ioObject->rm($file);
+            Mage::helper('mycdn')->addLog('[DELETE] CRON delete for ' . $file);
         }
 
         if ($result) {
-            Mage::helper('mycdn')->addLog('[JOB] CRON delete job for ' . $this->getData('filename')."\n");
+            Mage::helper('mycdn')->addLog('[JOB] CRON delete job for ' . $file . "\n");
             $this->delete();
         }
     }

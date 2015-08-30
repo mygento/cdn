@@ -9,7 +9,7 @@ class Mygento_Cdn_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Check is file in cache
      *
-     * @param string $fileName
+     * @param string $file
      * @return boolean
      */
     public function checkPathInCache($file)
