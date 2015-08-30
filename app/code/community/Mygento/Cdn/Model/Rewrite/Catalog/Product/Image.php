@@ -39,7 +39,8 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         }
 
         if (Mage::helper('mycdn')->isFileExists($this->_newFile)) {
-            return Mage::getModel('mycdn/adapter')->uploadFileAsync($this->_newFile, $this->_newFile);
+            Mage::getModel('mycdn/adapter')->uploadFileAsync($this->_newFile, $this->_newFile);
+            return true;
         }
 
         return false;
@@ -55,7 +56,8 @@ class Mygento_Cdn_Model_Rewrite_Catalog_Product_Image extends Mage_Catalog_Model
         if (!Mage::getStoreConfig('mycdn/general/enabled')) {
             return parent::getUrl();
         }
-        if (!$this->isCached()) {
+        $cache = Mage::helper('mycdn')->checkPathInCache($this->_newFile);
+        if (!$cache) {
             return parent::getUrl();
         }
 
