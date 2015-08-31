@@ -88,9 +88,9 @@ class Mygento_Cdn_Model_Adapters_S3
     /**
      * Minify and Gzip file before upload
      *
-     * @param type $data
-     * @param type $file
-     * @param type $content_type
+     * @param array $data
+     * @param string $file
+     * @param string $content_type
      * @return type
      */
     private function minify($data, $file, $content_type)

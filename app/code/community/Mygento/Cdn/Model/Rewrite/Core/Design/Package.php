@@ -30,7 +30,7 @@ class Mygento_Cdn_Model_Rewrite_Core_Design_Package extends Mage_Core_Model_Desi
      * @param string $targetFile
      * @param boolean $mustMerge
      * @param type $beforeMergeCallback
-     * @param type $extensionsFilter
+     * @param string $extensionsFilter
      * @param string $content_type
      * @return boolean
      */

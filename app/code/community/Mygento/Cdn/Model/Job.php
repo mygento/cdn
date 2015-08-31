@@ -45,7 +45,6 @@ class Mygento_Cdn_Model_Job extends Mage_Core_Model_Abstract
         $result = $adapter->uploadFile($file, $file, $this->getData('content_type'));
 
         if ($result && $this->getData('delete')) {
-
             $ioObject = new Varien_Io_File();
             $ioObject->setAllowCreateFolders(true);
             $ioObject->open(array('path' => $ioObject->dirname($file)));
