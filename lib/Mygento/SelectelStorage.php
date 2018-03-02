@@ -1,7 +1,6 @@
 <?php
 
 /**
- * Created 06.09.14 23:47 by PhpStorm.
  *
  * PHP version 5
  *

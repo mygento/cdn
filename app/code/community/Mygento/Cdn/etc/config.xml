@@ -17,7 +17,12 @@
             <s3>
                 <gzip>1</gzip>
             </s3>
-        </mycdn>
+        </mycdn>        
+        <system>
+            <media_storage_configuration>
+                <ignored_resources>.svn,.htaccess,cache,tmp</ignored_resources>
+            </media_storage_configuration>
+        </system>
     </default>
     <global>
         <blocks>
@@ -29,6 +34,11 @@
             <mycdn>
                 <class>Mygento_Cdn_Helper</class>
             </mycdn>
+            <core>
+                <rewrite>                   
+                    <file_storage_database>Mygento_Cdn_Helper_Rewrite_Core_File_Storage_Database</file_storage_database>
+                </rewrite>
+            </core>
         </helpers>
         <models>
             <mycdn>
@@ -43,43 +53,20 @@
                         <table>mygento_cdn_job</table>
                     </job>
                 </entities>
-            </mycdn_resource>
-            <catalog>
+            </mycdn_resource>            
+            <adminhtml>
                 <rewrite>
-                    <product_image>Mygento_Cdn_Model_Rewrite_Catalog_Product_Image</product_image>
+                    <system_config_source_storage_media_storage>Mygento_Cdn_Model_Rewrite_Config_Source_Media_Storage</system_config_source_storage_media_storage>
                 </rewrite>
-            </catalog>
-            <widget>
-                <rewrite>
-                    <template_filter>Mygento_Cdn_Model_Rewrite_Widget_Template_Filter</template_filter>
-                </rewrite>
-            </widget>
+            </adminhtml>
             <core>
                 <rewrite>
-                    <design_package>Mygento_Cdn_Model_Rewrite_Core_Design_Package</design_package>
+                    <file_storage>Mygento_Cdn_Model_Rewrite_Core_File_Storage</file_storage>
+                    <file_storage_database>Mygento_Cdn_Model_Rewrite_Core_File_Storage_Database</file_storage_database>
+                    <!-- <file_storage_directory_database>Thai_S3_Model_Core_File_Storage_Directory_Database</file_storage_directory_database>-->
                 </rewrite>
             </core>
-        </models>
-        <cache>
-            <types>
-                <mycdn>
-                    <label>Mygento CDN Storage</label>
-                    <description>CDN cached urls</description>
-                    <tags>MYCDN_URL</tags>
-                </mycdn>
-            </types>
-        </cache>
-        <events>
-            <catalog_product_media_save_before> 
-                <observers>
-                    <mycdn_upload>
-                        <type>singleton</type>
-                        <class>mycdn/observer</class>
-                        <method>uploadOnSave</method>
-                    </mycdn_upload>
-                </observers>
-            </catalog_product_media_save_before>
-        </events>
+        </models>        
         <resources>
             <mycdn_setup>
                 <setup>
@@ -152,19 +139,7 @@
                 </mycdn>
             </modules>
         </translate>
-    </frontend>
-    <crontab>
-        <jobs>
-            <mygento_cdn_uploadfile>
-                <schedule>
-                    <cron_expr>* * * * *</cron_expr>
-                </schedule>
-                <run>
-                    <model>mycdn/observer::processJob</model>
-                </run>
-            </mygento_cdn_uploadfile>
-        </jobs>
-    </crontab>
+    </frontend>    
     <phpunit>
         <suite>
             <modules>

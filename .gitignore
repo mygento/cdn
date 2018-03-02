@@ -1,3 +1,5 @@
 .DS_Store
 /magento.py
 /vendor/
+/nbproject
+composer.lock

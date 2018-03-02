@@ -3,3 +3,4 @@ app/etc/modules/Mygento_Cdn.xml app/etc/modules/Mygento_Cdn.xml
 app/locale/ru_RU/Mygento_Cdn.csv app/locale/ru_RU/Mygento_Cdn.csv
 app/design/adminhtml/default/default/template/mygento/cdn app/design/adminhtml/default/default/template/mygento/cdn
 lib/Mygento/SelectelStorage.php lib/Mygento/SelectelStorage.php
+shell/cdn_export.php shell/cdn_export.php
